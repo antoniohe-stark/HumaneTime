@@ -1,0 +1,20 @@
+<resources>
+    <string name="app_name">HumaneTime</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="nav_header_title">Android Studio</string>
+    <string name="nav_header_subtitle">android.studio@android.com</string>
+    <string name="nav_header_desc">Navigation header</string>
+    <string name="action_settings">Settings</string>
+
+    <string name="menu_home">Home</string>
+    <string name="menu_gallery">Gallery</string>
+    <string name="menu_slideshow">Slideshow</string>
+    <string name="correo_e">Correo electrónico</string>
+    <string name="contraseña">Contraseña</string>
+    <string name="user">ADMIN</string>
+    <string name="iniciar_sesion">Iniciar sesión</string>
+    <string name="entrar">Entrar</string>
+    <string name="crear_cuenta">Crear cuenta</string>
+    <string name="reestablecer_contrase_a">Reestablecer Contraseña</string>
+</resources>
