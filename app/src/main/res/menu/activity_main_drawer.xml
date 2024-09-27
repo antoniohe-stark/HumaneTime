@@ -1,20 +1,66 @@
 <?xml version="1.0" encoding="utf-8"?>
-<menu xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    tools:showIn="navigation_view">
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
 
     <group android:checkableBehavior="single">
+
         <item
-            android:id="@+id/nav_home"
-            android:icon="@drawable/ic_menu_camera"
-            android:title="@string/menu_home" />
+            android:id="@+id/nav_build"
+            android:icon="@drawable/build"
+            android:title="Datos de la compañia" />
+
         <item
-            android:id="@+id/nav_gallery"
-            android:icon="@drawable/ic_menu_gallery"
-            android:title="@string/menu_gallery" />
+            android:id="@+id/nav_supervisores"
+            android:icon="@drawable/supervisores"
+            android:title="Supervisores" />
+
         <item
-            android:id="@+id/nav_slideshow"
-            android:icon="@drawable/ic_menu_slideshow"
-            android:title="@string/menu_slideshow" />
+            android:id="@+id/nav_zonas"
+            android:icon="@drawable/zonas"
+            android:title="Zonas" />
+
+        <item
+            android:id="@+id/nav_estaciones"
+            android:icon="@drawable/estaciones"
+            android:title="Estaciones" />
+
+        <item
+            android:id="@+id/nav_empleados"
+            android:icon="@drawable/empleados"
+            android:title="Empleados" />
+
+        <item
+            android:id="@+id/nav_reportes"
+            android:icon="@drawable/reportes"
+            android:title="Reportes" />
+
+        <item
+            android:id="@+id/nav_historial"
+            android:icon="@drawable/historial_"
+            android:title="Historial de auditoría" />
+
+
+        <item
+            android:id="@+id/nav_password"
+            android:icon="@drawable/password"
+            android:title="Cambiar contraseña" />
+
+        <item
+            android:id="@+id/nav_settings"
+            android:icon="@drawable/settings"
+            android:title="Configuración" />
+
     </group>
+
+
+    <group android:checkableBehavior="single">
+
+
+        <item
+            android:id="@+id/nav_salir"
+            android:icon="@drawable/salir"
+            android:title="Cerrar sesión" />
+
+    </group>
+
 </menu>

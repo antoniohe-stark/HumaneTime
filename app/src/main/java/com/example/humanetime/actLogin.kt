@@ -39,7 +39,7 @@ class actLogin : AppCompatActivity() {
 
             if (email.isNotEmpty()) {
                 if (password.isNotEmpty()) {
-                    login(email, password)
+                   // login(email, password)
 
 
                    val intent = Intent(this@actLogin, MainActivity ::class.java)
@@ -73,7 +73,7 @@ class actLogin : AppCompatActivity() {
             override fun onResponse(call: Call<LoginResponse>, response: Response<LoginResponse>) {
                 if (response.isSuccessful) {
                     val loginResponse = response.body()
-                    val intent = Intent(this@actLogin, actLogin::class.java)
+                    val intent = Intent(this@actLogin, MainActivity::class.java)
                     startActivity(intent)
                     finish()
 
@@ -97,12 +97,19 @@ class actLogin : AppCompatActivity() {
     }
 
     private fun showAlert(title: String, message: String) {
-        AlertDialog.Builder(this)
-            .setTitle(title)
-            .setMessage(message)
-            .setPositiveButton("Aceptar") { dialog, _ -> dialog.dismiss() }
-            .create()
-            .show()
+
+
+        if (!isFinishing && !isDestroyed) {
+            AlertDialog.Builder(this)
+                .setTitle(title)
+                .setMessage(message)
+                .setPositiveButton("Aceptar") { dialog, _ -> dialog.dismiss() }
+                .create()
+                .show()
+        }
+
+
+
     }
 
 

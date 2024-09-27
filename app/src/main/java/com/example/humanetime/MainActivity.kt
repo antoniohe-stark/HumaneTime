@@ -24,13 +24,13 @@ class MainActivity : AppCompatActivity() {
 
         val sharedPreferences = getSharedPreferences("user_prefs", MODE_PRIVATE)
         val isLoggedIn = sharedPreferences.getBoolean("isLoggedIn", false)
-
-        if (!isLoggedIn) {
-            val intent = Intent(this, actLogin ::class.java)
-            startActivity(intent)
-            finish()   } else {
-              setContentView(R.layout.activity_main)
-        }
+//arreglar despues
+//        if (!isLoggedIn) {
+//            val intent = Intent(this, actLogin ::class.java)
+//            startActivity(intent)
+//            finish()   } else {
+//              setContentView(R.layout.activity_main)
+//        }
 
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
