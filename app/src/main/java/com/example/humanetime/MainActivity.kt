@@ -90,7 +90,6 @@ class MainActivity : AppCompatActivity() {
             drawerLayout.closeDrawer(navView)
             true
         }
-
         appBarConfiguration = AppBarConfiguration(
             setOf(
                 R.id.nav_home
@@ -111,6 +110,7 @@ class MainActivity : AppCompatActivity() {
         return navController.navigateUp(appBarConfiguration) || super.onSupportNavigateUp()
     }
 
+
      fun logout() {
         val sharedPreferences = getSharedPreferences("user_prefs", MODE_PRIVATE)
         val editor = sharedPreferences.edit()
@@ -121,6 +121,7 @@ class MainActivity : AppCompatActivity() {
         startActivity(intent)
         finish()
     }
+
 
     private fun showAlert(title: String, message: String, onPositive: () -> Unit) {
         if (!isFinishing && !isDestroyed) {

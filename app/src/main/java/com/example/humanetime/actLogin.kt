@@ -30,7 +30,6 @@ class actLogin : AppCompatActivity() {
         initListeners()
     }
 
-
     fun initListeners() {
         binding.btnIngresar.setOnClickListener {
 
