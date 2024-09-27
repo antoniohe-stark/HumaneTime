@@ -33,26 +33,28 @@ class actLogin : AppCompatActivity() {
 
     fun initListeners() {
         binding.btnIngresar.setOnClickListener {
-            if (binding.inputMail.isNotEmpty()) {
-                if (binding.inputPassword.isNotEmpty()) {
-                    login(binding.inputMail.toString(), binding.inputPassword.toString())
 
-//                    val intent = Intent(this@actLogin, actLogin::class.java)
-//                    startActivity(intent)
-//                    finish()
+            val email = binding.inputMail.editText?.text.toString().trim()
+            val password = binding.inputPassword.editText?.text.toString().trim()
 
-                }
-                else {
-                    showAlert(  "Aviso", "Ingrese su contraseña")
+            if (email.isNotEmpty()) {
+                if (password.isNotEmpty()) {
+                    login(email, password)
+
+
+                   val intent = Intent(this@actLogin, MainActivity ::class.java)
+                    startActivity(intent)
+                    finish()
+                } else {
+                    showAlert("Aviso", "Ingrese su contraseña")
                     binding.inputPassword.requestFocus()
-
                 }
-            }
-            else {
-                 showAlert( "Aviso", "Ingrese su correo electrónico")
+            } else {
+                showAlert("Aviso", "Ingrese su correo electrónico")
                 binding.inputMail.requestFocus()
             }
         }
+
 
         binding.tvCrearCuenta.setOnClickListener {}
 

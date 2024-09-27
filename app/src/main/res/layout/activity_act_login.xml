@@ -59,8 +59,8 @@
             app:boxCornerRadiusBottomStart="8dp"
             app:boxCornerRadiusTopEnd="8dp"
             app:boxCornerRadiusTopStart="8dp"
-            app:hintEnabled="true"
-            app:hint="@string/correo_e">
+
+            android:hint="@string/correo_e">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:layout_width="match_parent"
@@ -83,8 +83,7 @@
             app:boxCornerRadiusBottomStart="8dp"
             app:boxCornerRadiusTopEnd="8dp"
             app:boxCornerRadiusTopStart="8dp"
-            app:hintEnabled="true"
-            app:hint="@string/contraseña">
+            android:hint="@string/contraseña">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:layout_width="match_parent"

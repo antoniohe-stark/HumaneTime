@@ -26,13 +26,10 @@ class MainActivity : AppCompatActivity() {
         val isLoggedIn = sharedPreferences.getBoolean("isLoggedIn", false)
 
         if (!isLoggedIn) {
-            // Si el usuario no está logueado, redirigir a LoginActivity
             val intent = Intent(this, actLogin ::class.java)
             startActivity(intent)
-            finish()  // Terminar el MainActivity para evitar que vuelva al presionar "atrás"
-        } else {
-            // Si el usuario está logueado, cargar el contenido de MainActivity
-            setContentView(R.layout.activity_main)
+            finish()   } else {
+              setContentView(R.layout.activity_main)
         }
 
         binding = ActivityMainBinding.inflate(layoutInflater)
@@ -48,8 +45,8 @@ class MainActivity : AppCompatActivity() {
         val drawerLayout: DrawerLayout = binding.drawerLayout
         val navView: NavigationView = binding.navView
         val navController = findNavController(R.id.nav_host_fragment_content_main)
-        // Passing each menu ID as a set of Ids because each
-        // menu should be considered as top level destinations.
+
+
         appBarConfiguration = AppBarConfiguration(
             setOf(
                 R.id.nav_home, R.id.nav_gallery, R.id.nav_slideshow
@@ -60,8 +57,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        menuInflater.inflate(R.menu.main, menu)
+          menuInflater.inflate(R.menu.main, menu)
         return true
     }
 
