@@ -39,9 +39,7 @@ class actLogin : AppCompatActivity() {
 
             if (email.isNotEmpty()) {
                 if (password.isNotEmpty()) {
-                    // login(email, password)
-
-
+                    login(email, password)
                     val intent = Intent(this@actLogin, MainActivity::class.java)
                     startActivity(intent)
                     finish()
@@ -76,6 +74,8 @@ class actLogin : AppCompatActivity() {
                     val editor = sharedPreferences.edit()
                     editor.putBoolean("isLoggedIn", true)
                     editor.putString("token", loginResponse?.token)
+                    editor.putString("nombreUsuario", loginResponse?.acceso?.usuarioTiempo?.nombreCompleto)
+                    editor.putString("fotoUrl", loginResponse?.acceso?.usuarioTiempo?.foto)
                     editor.apply()
 
                     val intent = Intent(this@actLogin, MainActivity::class.java)

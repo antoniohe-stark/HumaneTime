@@ -29,8 +29,13 @@ androidx-navigation-fragment-ktx = { group = "androidx.navigation", name = "navi
 androidx-navigation-ui-ktx = { group = "androidx.navigation", name = "navigation-ui-ktx", version.ref = "navigationUiKtx" }
 androidx-activity = { group = "androidx.activity", name = "activity", version.ref = "activity" }
 material-v1110 = { module = "com.google.android.material:material", version.ref = "materialVersion" }
+dagger = { module = "com.google.dagger:dagger", version = "2.50" }
+dagger-compiler = { module = "com.google.dagger:dagger-compiler", version = "2.40" }
+
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
 jetbrains-kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
+
+
 

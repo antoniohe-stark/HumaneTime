@@ -14,25 +14,26 @@ import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.appcompat.app.AppCompatActivity
+import com.bumptech.glide.Glide
 import com.example.humanetime.databinding.ActivityMainBinding
+import com.example.humanetime.databinding.NavHeaderMainBinding
 
 class MainActivity : AppCompatActivity() {
 
     private lateinit var appBarConfiguration: AppBarConfiguration
     private lateinit var binding: ActivityMainBinding
 
+    val sharedPreferences = getSharedPreferences("user_prefs", MODE_PRIVATE)
+    val isLoggedIn = sharedPreferences.getBoolean("isLoggedIn", false)
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
-        val sharedPreferences = getSharedPreferences("user_prefs", MODE_PRIVATE)
-        val isLoggedIn = sharedPreferences.getBoolean("isLoggedIn", false)
-//arreglar despues
-//        if (!isLoggedIn) {
-//            val intent = Intent(this, actLogin ::class.java)
-//            startActivity(intent)
-//            finish()   } else {
-//              setContentView(R.layout.activity_main)
-//        }
+        if (!isLoggedIn) {
+            val intent = Intent(this, actLogin ::class.java)
+            startActivity(intent)
+            finish()   } else {
+              setContentView(R.layout.activity_main)
+        }
 
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
@@ -47,18 +48,34 @@ class MainActivity : AppCompatActivity() {
         val navView: NavigationView = binding.navView
         val navController = findNavController(R.id.nav_host_fragment_content_main)
 
-        navView.setupWithNavController(navController)
 
+        val headerBinding = NavHeaderMainBinding.bind(binding.navView.getHeaderView(0))
+
+        val nombreUsuarioTextView = headerBinding.tvUSerName
+        val fotoUsuarioImageView = headerBinding.imgAvatar
+
+        val nombreUsuario = sharedPreferences.getString("nombreUsuario", "Usuario")
+        val fotoUrl = sharedPreferences.getString("fotoUrl", "")
+
+        nombreUsuarioTextView.text = nombreUsuario
+
+        if (!fotoUrl.isNullOrEmpty()) {
+            Glide.with(this)
+                .load(fotoUrl)
+                .placeholder(R.drawable.ic_launcher_foreground)
+                .error(R.drawable.ic_launcher_foreground)
+                .into(fotoUsuarioImageView)
+        }
+        navView.setupWithNavController(navController)
         navView.setNavigationItemSelectedListener { op ->
             when (op.itemId) {
                 R.id.nav_home -> {
                     navController.navigate(R.id.nav_home)
                 }
-
                 R.id.nav_salir -> {
-                    Toast.makeText(this, "Salir seleccionado", Toast.LENGTH_SHORT).show()
-                    showAlert("Atención", "Esta acción cerrará la sesión actual")
-
+                    showAlert("Atención", "Esta acción cerrará la sesión actual") {
+                        logout()
+                    }
                 }
 
                 else -> {
@@ -73,7 +90,6 @@ class MainActivity : AppCompatActivity() {
             drawerLayout.closeDrawer(navView)
             true
         }
-
 
         appBarConfiguration = AppBarConfiguration(
             setOf(
@@ -95,10 +111,31 @@ class MainActivity : AppCompatActivity() {
         return navController.navigateUp(appBarConfiguration) || super.onSupportNavigateUp()
     }
 
-    private fun showAlert(title: String, message: String) {
+     fun logout() {
+        val sharedPreferences = getSharedPreferences("user_prefs", MODE_PRIVATE)
+        val editor = sharedPreferences.edit()
+          editor.remove("isLoggedIn")
+        editor.remove("token")
+        editor.apply()
+         val intent = Intent(this, actLogin::class.java)
+        startActivity(intent)
+        finish()
+    }
+
+    private fun showAlert(title: String, message: String, onPositive: () -> Unit) {
         if (!isFinishing && !isDestroyed) {
-            AlertDialog.Builder(this).setTitle(title).setMessage(message)
-                .setPositiveButton("Aceptar") { dialog, _ -> dialog.dismiss() }.create().show()
+            AlertDialog.Builder(this)
+                .setTitle(title)
+                .setMessage(message)
+                .setPositiveButton("Aceptar") { dialog, _ ->
+                    dialog.dismiss()
+                    onPositive()
+                }
+                .setNegativeButton("Cancelar") { dialog, _ ->
+                    dialog.dismiss()
+                }
+                .create()
+                .show()
         }
     }
 }
