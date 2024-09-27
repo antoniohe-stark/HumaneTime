@@ -39,10 +39,10 @@ class actLogin : AppCompatActivity() {
 
             if (email.isNotEmpty()) {
                 if (password.isNotEmpty()) {
-                   // login(email, password)
+                    // login(email, password)
 
 
-                   val intent = Intent(this@actLogin, MainActivity ::class.java)
+                    val intent = Intent(this@actLogin, MainActivity::class.java)
                     startActivity(intent)
                     finish()
                 } else {
@@ -58,8 +58,7 @@ class actLogin : AppCompatActivity() {
 
         binding.tvCrearCuenta.setOnClickListener {}
 
-        binding.tvReestablecerPass.setOnClickListener {
-        }
+        binding.tvReestablecerPass.setOnClickListener {}
 
     }
 
@@ -73,12 +72,18 @@ class actLogin : AppCompatActivity() {
             override fun onResponse(call: Call<LoginResponse>, response: Response<LoginResponse>) {
                 if (response.isSuccessful) {
                     val loginResponse = response.body()
+                    val sharedPreferences = getSharedPreferences("user_prefs", MODE_PRIVATE)
+                    val editor = sharedPreferences.edit()
+                    editor.putBoolean("isLoggedIn", true)
+                    editor.putString("token", loginResponse?.token)
+                    editor.apply()
+
                     val intent = Intent(this@actLogin, MainActivity::class.java)
                     startActivity(intent)
                     finish()
 
                 } else {
-                    showAlert( "Aviso", " ${response.message()}");
+                    showAlert("Aviso", " ${response.message()}");
                 }
 
                 if (response.body()?.error == true) {
@@ -91,26 +96,15 @@ class actLogin : AppCompatActivity() {
             }
 
             override fun onFailure(call: Call<LoginResponse>, t: Throwable) {
-                showAlert( "Aviso", "Error de conexión:  ${t.message}")
+                showAlert("Aviso", "Error de conexión:  ${t.message}")
             }
         })
     }
 
     private fun showAlert(title: String, message: String) {
-
-
         if (!isFinishing && !isDestroyed) {
-            AlertDialog.Builder(this)
-                .setTitle(title)
-                .setMessage(message)
-                .setPositiveButton("Aceptar") { dialog, _ -> dialog.dismiss() }
-                .create()
-                .show()
+            AlertDialog.Builder(this).setTitle(title).setMessage(message)
+                .setPositiveButton("Aceptar") { dialog, _ -> dialog.dismiss() }.create().show()
         }
-
-
-
     }
-
-
 }
